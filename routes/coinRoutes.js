@@ -3,7 +3,7 @@ const axios = require('axios');
 module.exports = (app) => {
 
     //get list of supported coins and their IDs, name, logo and price
-    app.get('/api/coinlist', async (req, res) => {
+    app.get('/api/coins', async (req, res) => {
 
         try {
             let response = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd',)
@@ -28,8 +28,9 @@ module.exports = (app) => {
     })
 
     //get current price of coin by ID. Will be used to regularly pull updated prices
-    app.get('/api/coinprices/', async (req, res) => {
+    app.get('/api/coins/prices/', async (req, res) => {
         try {
+            console.log(req.body)
             //build correct url from requested coins
             let urlBase = 'https://api.coingecko.com/api/v3/simple/price?ids=';
             let urlEnd = '&vs_currencies=usd'

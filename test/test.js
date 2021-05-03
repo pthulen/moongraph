@@ -9,10 +9,23 @@ chai.use(chaiHttp);
 
 //get route returns list of coins with id, name, price, and logo URL
 describe('Coinlist APIs', ()=> {
-    describe("Test Get route /api/coinlist", () => {
+    describe("Test Get route /api/coins", () => {
         it("It should return all coins with corrisponding id, name, price and logo Url", (done) => {
             chai.request(server)
-            .get('/api/coinlist')
+            .get('/api/coins')
+            .end((err,response) => {
+                console.log('Errors: ' + err);
+                response.should.have.status(200);
+                response.body.should.be.a('array');
+                response.body.length.should.not.be.eq(0);
+            done();    
+            });
+        })
+    })
+    describe("Test Get route /api/coins/prices", () => {
+        it("It should return current price for three test coins", (done) => {
+            chai.request(server)
+            .get('/api/coins/prices')
             .end((err,response) => {
                 console.log('Errors: ' + err);
                 response.should.have.status(200);

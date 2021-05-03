@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import CoinInput from './CoinInput';
+import Graph from './Graph';
+import CoinValue from './CoinValue';
 import '../App.css';
 
 class App extends Component {
@@ -10,10 +12,11 @@ class App extends Component {
             Moon Graph
           </header>
       <div className="container graph">
-            <p>Graph</p>
+            <Graph />
       </div>
       <div className="container main">
-         <CoinInput /> 
+        <CoinValue />
+        <CoinInput /> 
       </div>
 
 

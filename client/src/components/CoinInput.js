@@ -16,11 +16,26 @@ class CoinInput extends Component {
     handleChange(event) {
         this.setState({coinSelected: event.target.value});
       }
+    
+    renderOptions() {
+        switch (this.props.coins) {
+            case null:
+                return (<option value="bitcoin">Bitcoin</option>);
+            case false: 
+                return (<option value="bitcoin">Bitcoin</option>);    
+            default:
+                return (
+                    <select value={this.state.coinSelected} onChange={this.handleChange}>
+                        {this.props.coins.map((coin)=> {
+                            return <option value={coin.id} key={coin.id}>{coin.name}</option>
+                        })}
 
-    //run on user submit
-    // updateCoinAmount(coinId, amount) {
-    //     this.props.updatePortfolio(coinId,amount)
-    // }
+                    </select>
+                );
+
+        }
+    }  
+
     render() {
         return (
             <div>
@@ -32,10 +47,11 @@ class CoinInput extends Component {
                         
                         }}>
                     <label>Coin
-                    <select value={this.state.coinSelected} onChange={this.handleChange}>
+                    {this.renderOptions()}    
+                    {/* <select value={this.state.coinSelected} onChange={this.handleChange}>
                         <option value="bitcoin">Bitcoin</option>
                         <option value="ethereum">Ethereum</option>
-                    </select>
+                    </select> */}
                     </label>      
                     <input type="text" placeholder="amount" name="userInput" />
                     <button className="form btn">Submit</button>

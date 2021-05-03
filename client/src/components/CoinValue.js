@@ -3,10 +3,18 @@ import { connect } from 'react-redux';
 import * as actions from '../actions'; 
 
 class CoinValue extends Component {
+    findCoinValue(name, amount) {
+            console.log(name);
+        let coinList = this.props.coins;
+        let coinIndex = this.props.coins.findIndex(x => x.id === this.props.portfolio.id)
+        let currentPrice = coinList[coinIndex].current_price;
+        const value = currentPrice * amount;
+        return value;
+    }
     
     renderContent() {
         if(this.props.portfolio) {
-            return (<p>Portfolio value: 1000</p>)
+            return (<p>Portfolio value: {this.findCoinValue('update later',this.props.portfolio.amount)}</p>)
         } else {
             return (<p>Portfolio value: 0</p>)
         }

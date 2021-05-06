@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
+import Header from './Header';
 import CoinInput from './CoinInput';
 import Graph from './Graph';
 import CoinValue from './CoinValue';
@@ -18,9 +19,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-              <header className="App-header">
-                Moon Graph
-              </header>
+              <Header className="App-header" />
           <div className="container graph">
                 <Graph />
           </div>

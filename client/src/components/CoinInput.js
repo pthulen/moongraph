@@ -42,9 +42,7 @@ class CoinInput extends Component {
                 <form onSubmit={(event) => {
                         event.preventDefault()
                         let amount = event.target.userInput.value;
-                        this.props.updatePortfolio(this.state.coinSelected,amount);    
-                        console.log(`amount entered: ${amount}`);
-                        
+                        this.props.updatePortfolio(this.state.coinSelected,amount,this.props.portfolio);    
                         }}>
                     <label>Coin
                     {this.renderOptions()}    

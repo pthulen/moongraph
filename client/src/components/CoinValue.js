@@ -14,7 +14,7 @@ class CoinValue extends Component {
     
     renderContent() {
         if(this.props.portfolio) {
-            return (<p>Portfolio value: {this.findCoinValue('update later',this.props.portfolio.amount)}</p>)
+            return (<p>Portfolio value: {this.findCoinValue('update later', this.props.portfolio.amount)}</p>)
         } else {
             return (<p>Portfolio value: 0</p>)
         }

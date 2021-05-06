@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 
 //require models for DB
+require('./models/user');
 
 //require passport js for Oauth
 require('./services/passport');
@@ -27,6 +28,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./routes/coinRoutes')(app);
+require('./routes/authRoutes')(app);
 
 if (process.env.NODE_ENV === "production") {
     // express will serve up production assets
@@ -43,4 +45,4 @@ const PORT = process.env.PORT || 5000;
 console.log(`App listening on ${PORT}`)
 app.listen(PORT);
 
-module.exports = app //for testing
+// module.exports = app //for testing

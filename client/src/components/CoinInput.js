@@ -27,7 +27,7 @@ class CoinInput extends Component {
                 return (
                     <select value={this.state.coinSelected} onChange={this.handleChange}>
                         {this.props.coins.map((coin)=> {
-                            return <option value={coin.id} key={coin.id}>{coin.name}</option>
+                            return <option value={coin.id} key={coin.id}>{coin.name} </option>
                         })}
 
                     </select>

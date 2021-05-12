@@ -7,6 +7,8 @@ const keys = require('./config/keys');
 
 //require models for DB
 require('./models/user');
+require('./models/portfolio');
+require('./models/coin');
 
 //require passport js for Oauth
 require('./services/passport');

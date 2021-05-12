@@ -42,7 +42,7 @@ class CoinInput extends Component {
                 <form onSubmit={(event) => {
                         event.preventDefault()
                         let amount = event.target.userInput.value;
-                        this.props.updatePortfolio(this.state.coinSelected,amount,this.props.portfolio);    
+                        this.props.createPortfolio(this.state.coinSelected,amount,this.props.portfolio);    
                         }}>
                     <label>Coin
                     {this.renderOptions()}    
@@ -59,7 +59,8 @@ class CoinInput extends Component {
     }
 }
 const mapStateToProps= (state) => ({
-    coins: state.coins
+    coins: state.coins,
+    portfolio: state.portfolio
 });
 
 export default connect(mapStateToProps, actions)(CoinInput)

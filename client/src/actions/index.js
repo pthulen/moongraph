@@ -13,6 +13,11 @@ export const fetchCoins = () => async dispatch => {
     dispatch({ type: 'FETCH_COINS', payload: res.data})
 }
 
+export const fetchPortfolio = () => async dispatch => {
+    const res = await axios.get('/api/portfolio');
+ 
+    dispatch({ type: 'FETCH_PORTFOLIO', payload: res.data });
+ };
 export const createPortfolio = (coinId, amount) => async dispatch => {
       const porfolioData = {
           date: Date.now(),
@@ -22,4 +27,14 @@ export const createPortfolio = (coinId, amount) => async dispatch => {
     const res = await axios.post('/api/portfolio', porfolioData);
 
     dispatch({ type: 'CREATE_PORTFOLIO', payload: res.data })
+}
+
+export const addPortfolioCoin = (coinId, amount) => async dispatch => {
+    const newCoinData = {
+        id: coinId,
+        amount: amount
+    }
+  const res = await axios.put('/api/portfolio', newCoinData);
+
+  dispatch({ type: 'ADD_PORTFOLIO_COIN', payload: res.data })
 }

@@ -23,7 +23,7 @@ class CoinValue extends Component {
     render() {
         return (
             <div>
-                {this.renderContent()}
+                {/* {this.renderContent()} */}
             </div>
         );
     }

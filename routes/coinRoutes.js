@@ -1,9 +1,4 @@
 const axios = require('axios');
-const { Mongoose } = require('mongoose');
-
-const mongoose = require('mongoose');
-const Portfolio = mongoose.model('portfolio');
-const Coin = mongoose.model('coin');
 
 module.exports = (app) => {
 
@@ -58,48 +53,5 @@ module.exports = (app) => {
         }
     })
 
-    //get portfolio of current user
-    app.get('/api/portfolio', async (req, res) => {
-
-        try {
-            const portfolio = await Portfolio.find({ _user: req.user.id });
-            res.status(200).send(portfolio);
-        } catch (error) {
-            res.send(error);
-        }
-    });
-
-    app.post('/api/portfolio', async (req,res) => {
-        console.log(req.body);
-        const { date, id, amount } = req.body; 
-        
-        const portfolio = new Portfolio({
-            _user: req.user.id,
-            presentData: {
-                date,
-                coinData: {
-                    id,
-                    currentAmount: amount
-                }
-            }
-        })
-
-        // const coinSchema = new Schema({
-        //     id: String,
-        //     symbol: String,
-        //     name: String,
-        //     image: String,
-        //     currentPrice: Number,
-        //     currentAmount: Number,
-        //     currentValue: Number
-        // });
-
-        try {
-            await portfolio.save();
-            res.send(portfolio);
-            
-        } catch (err) {
-            res.status(400).send(err);
-        }
-    });
+   
 }

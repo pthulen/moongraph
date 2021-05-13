@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 class Portfolio extends Component {
+    componentDidMount() {
+            this.props.fetchPortfolio();
+            this.props.addPortfolioCoin("ethereum","4");
+    }
     render() {
         return (
             <div>
@@ -9,5 +15,8 @@ class Portfolio extends Component {
         );
     }
 }
+const mapStateToProps= (state) => ({
+    portfolio: state.portfolio
+});
 
-export default Portfolio;
+export default connect(mapStateToProps, actions)(Portfolio);

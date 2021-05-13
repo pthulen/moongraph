@@ -14,7 +14,7 @@ require('./models/coin');
 require('./services/passport');
 
 //connect to mongoDb with 
-mongoose.connect(keys.mongoURI, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(keys.mongoURI, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 
 const app = express();
 
@@ -31,6 +31,7 @@ app.use(passport.session());
 
 require('./routes/coinRoutes')(app);
 require('./routes/authRoutes')(app);
+require('./routes/portfolioRoutes')(app);
 
 if (process.env.NODE_ENV === "production") {
     // express will serve up production assets

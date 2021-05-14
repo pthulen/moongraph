@@ -26,7 +26,9 @@ export const createPortfolio = (coinId, amount) => async dispatch => {
       }
     const res = await axios.post('/api/portfolio', porfolioData);
 
-    dispatch({ type: 'CREATE_PORTFOLIO', payload: res.data })
+    //send the new portfolio data back in an array 
+    let data = [res.data]
+    dispatch({ type: 'CREATE_PORTFOLIO', payload: data })
 }
 
 export const addPortfolioCoin = (coinId, amount) => async dispatch => {

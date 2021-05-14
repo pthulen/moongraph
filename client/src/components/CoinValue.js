@@ -13,7 +13,8 @@ class CoinValue extends Component {
     }
     
     renderContent() {
-        if(this.props.portfolio) {
+        if(this.props.portfolio !== [] && this.props.portfolio !== null) {
+            console.log(`current state of portfolio: ${this.props.portfolio}`);
             return (<p>Portfolio value: {this.findCoinValue('update later', this.props.portfolio.presentData.coinData[0].currentAmount)}</p>)
         } else {
             return (<p>Portfolio value: 0</p>)

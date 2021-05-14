@@ -16,6 +16,12 @@ class CoinInput extends Component {
     handleChange(event) {
         this.setState({coinSelected: event.target.value});
       }
+
+    getImageUrl() {
+        //search "coins" in redux store for this.state.coinSelected
+        //return matching coin's url to img element
+        console.log(this.state.coinSelected);
+    }  
     
     renderOptions() {
         switch (this.props.coins) {
@@ -41,7 +47,8 @@ class CoinInput extends Component {
             <div>
                 <form onSubmit={(event) => {
                         event.preventDefault()
-                        let amount = event.target.userInput.value;
+                        console.log('Create port fired!')
+                        let amount = 0;
                         this.props.createPortfolio(this.state.coinSelected,amount,this.props.portfolio);    
                         }}>
                     <label>Coin
@@ -50,8 +57,9 @@ class CoinInput extends Component {
                         <option value="bitcoin">Bitcoin</option>
                         <option value="ethereum">Ethereum</option>
                     </select> */}
-                    </label>      
-                    <input type="text" placeholder="amount" name="userInput" />
+                    </label>
+                    {this.getImageUrl()}      
+                    <img className="coin-logo" src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579" alt="coin-logo"/>
                     <button className="form btn">Submit</button>
                     </form>
             </div>

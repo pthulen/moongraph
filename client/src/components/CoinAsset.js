@@ -28,10 +28,13 @@ class CoinAsset extends Component {
             coins.push(element.id);
         });
         coins = coins.filter(val => !coinsInUse.includes(val));
-        console.log(`coins in port: ${coinsInUse}. unusedcoins: ${coins}`);  
-        // this.props.coins.map((coin)=> {
-        //     return <option value={coin.id} key={coin.id}>{coin.name} </option>
-        // })
+        unusedCoins = this.props.coins.filter(el =>{
+            return coins.includes(el.id);
+        })
+        
+        return unusedCoins.map((coin)=> {
+            return <option value={coin.id} key={coin.id}>{coin.name} </option>
+        })
     }
 
     renderContent() {
@@ -49,9 +52,7 @@ class CoinAsset extends Component {
                         <label>Coin
                             <select value={this.state.coinSelected} onChange={this.handleChange}>
                                 {this.sortedCoinList()}
-                                {this.props.coins.map((coin)=> {
-                                    return <option value={coin.id} key={coin.id}>{coin.name} </option>
-                                })}
+                                
                             </select> 
                      {/* <select value={this.state.coinSelected} onChange={this.handleChange}>
                          <option value="bitcoin">Bitcoin</option>
@@ -99,7 +100,7 @@ class CoinAsset extends Component {
                         
                     ) 
                 }
-                console.log(portfolio)
+                console.log("Loading error: " + portfolio)
                 return (<p>loading error </p>)
             }
     } 

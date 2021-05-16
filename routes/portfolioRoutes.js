@@ -45,24 +45,21 @@ module.exports = (app) => {
     //adds new coin/asset to portfolio, should always initialize with zero amount
     app.put('/api/portfolio', async (req, res) => {
         const { id, amount } = req.body;
-        console.log(amount);
         const newCoin =  {
             $push:{
                     "presentData.coinData":{
                         id,
-                        currentAmount: "9"
+                        currentAmount: amount
                     } 
             } 
             }
         //access current user's portfolio
-        // const portfolio = await Portfolio.findOneAndUpdate({ _user: req.user.id },newCoin)
-        // console.log(portfolio);
         //add coin to presentData -> coinData array
         //portfolio[0].presentData.coinData.push(newCoin);
         try {
             const portfolio = await Portfolio.findOneAndUpdate({ _user: req.user.id },newCoin)
-            console.log(portfolio);
             await portfolio.save();
+            res.send(portfolio);
         } catch (err) {
             console.log(err);
             res.status(400).send(err);

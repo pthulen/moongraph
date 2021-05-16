@@ -31,11 +31,19 @@ class CoinAsset extends Component {
         unusedCoins = this.props.coins.filter(el =>{
             return coins.includes(el.id);
         })
-        
-        return unusedCoins.map((coin)=> {
-            return <option value={coin.id} key={coin.id}>{coin.name} </option>
-        })
+        return unusedCoins;
     }
+
+    getImageUrl() {
+        //search "coins" in redux store for this.state.coinSelected
+        const currentCoin = this.state.coinSelected;
+        const found = this.props.coins.find(obj =>{
+            return obj.id === currentCoin;
+        })
+        //return matching coin's url to img element
+        return found.image
+        
+    }  
 
     renderContent() {
         let portfolio = this.props.portfolio;
@@ -51,7 +59,9 @@ class CoinAsset extends Component {
                          }}>
                         <label>Coin
                             <select value={this.state.coinSelected} onChange={this.handleChange}>
-                                {this.sortedCoinList()}
+                                {this.sortedCoinList().map((coin)=> {
+                                    return <option value={coin.id} key={coin.id}>{coin.name} </option>
+                                    })}
                                 
                             </select> 
                      {/* <select value={this.state.coinSelected} onChange={this.handleChange}>
@@ -59,8 +69,8 @@ class CoinAsset extends Component {
                         <option value="ethereum">Ethereum</option>
                      </select> */}
                             </label>
-                          
-                     <img className="coin-logo" src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579" alt="coin-logo"/>
+                            {/* {this.getImageUrl()}     */}
+                     <img className="coin-logo" src={this.getImageUrl()} alt="coin-logo"/>
                      <button className="form btn">Submit</button>
                      </form>
                  </div>
@@ -86,8 +96,7 @@ class CoinAsset extends Component {
                          <option value="bitcoin">Bitcoin</option>
                         <option value="ethereum">Ethereum</option>
                      </select> */}
-                            </label>
-                          
+                            </label> 
                      <img className="coin-logo" src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579" alt="coin-logo"/>
                      <button className="form btn">Submit</button>
                      </form>

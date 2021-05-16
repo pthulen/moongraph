@@ -78,19 +78,4 @@ module.exports = (app) => {
 
     //});
 
-
-
-
-
-
-
-    // const coinSchema = new Schema({
-        //     id: String,
-        //     symbol: String,
-        //     name: String,
-        //     image: String,
-        //     currentPrice: Number,
-        //     currentAmount: Number,
-        //     currentValue: Number
-        // });
 }

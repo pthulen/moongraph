@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 import Header from './Header';
-import CoinInput from './CoinInput';
 import Graph from './Graph';
-import CoinValue from './CoinValue';
+
 
 import '../App.css';
 import Portfolio from './Portfolio';
@@ -24,11 +23,11 @@ class App extends Component {
                 <Graph />
           </div>
           <div className="container main">
-            <CoinValue />
-            <CoinInput /> 
+            
+            <Route exact path="/portfolio" component={Portfolio} />
           </div>
 
-          <Route exact path="/portfolio" component={Portfolio} />
+          
         </div>
       
       </BrowserRouter>

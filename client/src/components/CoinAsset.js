@@ -5,16 +5,24 @@ import * as actions from '../actions';
 class CoinAsset extends Component {
     constructor(props) {
         super(props);
-        this.state = {coinSelected: 'bitcoin'};
+        this.state = {
+            coinSelected: ''
+        };
     
         this.handleChange = this.handleChange.bind(this);
+      
     }
     componentDidMount() {
         this.props.fetchCoins();
+        
     }
+
+    
     handleChange(event) {
+        console.log('selected coin: ' + event.target.value)
         this.setState({coinSelected: event.target.value});
     }
+
 
     sortedCoinList() {
         //returns option list of coins that have not yet been added to user portfolio
@@ -32,18 +40,22 @@ class CoinAsset extends Component {
             return coins.includes(el.id);
         })
         return unusedCoins;
+        
     }
 
     getImageUrl() {
         //search "coins" in redux store for this.state.coinSelected
         const currentCoin = this.state.coinSelected;
+        if(currentCoin === '') {
+            return null;
+        }
         const found = this.props.coins.find(obj =>{
             return obj.id === currentCoin;
         })
         //return matching coin's url to img element
         return found.image
         
-    }  
+    }
 
     renderContent() {
         let portfolio = this.props.portfolio;
@@ -53,24 +65,29 @@ class CoinAsset extends Component {
                         <p>Use update</p>
                         <form onSubmit={(event) => {
                            event.preventDefault()
-                         console.log('Create port fired!')
+                           if(this.state.coinSelected === '') {
+                               alert("Please select a coin to add.");
+                               return;
+                           }
                          let amount = 0;
-                         this.props.addPortfolioCoin(this.state.coinSelected,amount,this.props.portfolio);    
+                         this.props.addPortfolioCoin(this.state.coinSelected,amount,this.props.portfolio);
+                         //re render assets in portfolio
+                         this.forceUpdate();
+                         //update drop down list
+                         this.setState({ coinSelected: '' });
                          }}>
                         <label>Coin
                             <select value={this.state.coinSelected} onChange={this.handleChange}>
-                                {this.sortedCoinList().map((coin)=> {
+                                <option value='' disabled defaultValue>Choose a Coin</option>
+                                {this.props.portfolio ? this.sortedCoinList().map((coin)=> {
                                     return <option value={coin.id} key={coin.id}>{coin.name} </option>
-                                    })}
+                                    }) : null}
                                 
                             </select> 
-                     {/* <select value={this.state.coinSelected} onChange={this.handleChange}>
-                         <option value="bitcoin">Bitcoin</option>
-                        <option value="ethereum">Ethereum</option>
-                     </select> */}
+                     
                             </label>
-                     <img className="coin-logo" src={this.getImageUrl()} alt="coin-logo"/>
-                     <button className="form btn">Submit</button>
+                            {this.props.portfolio.length > 0  && this.props.coins && this.state.coinSelected !== '' ? <img className="coin-logo" src={this.getImageUrl()} alt="coin-logo"/> : null}
+                     <button className="form btn">Add Asset</button>
                      </form>
                  </div>
                 )
@@ -81,7 +98,6 @@ class CoinAsset extends Component {
                         <p>No portoflio yet use createportfolio</p>
                         <form onSubmit={(event) => {
                            event.preventDefault()
-                         console.log('Update port fired!')
                          let amount = 0;
                          this.props.createPortfolio(this.state.coinSelected,amount,this.props.portfolio);    
                          }}>
@@ -96,8 +112,9 @@ class CoinAsset extends Component {
                         <option value="ethereum">Ethereum</option>
                      </select> */}
                             </label> 
-                     <img className="coin-logo" src={this.getImageUrl()} alt="coin-logo"/>
-                     <button className="form btn">Submit</button>
+                            {this.state.coinSelected ? <img className="coin-logo" src={this.getImageUrl()} alt="coin-logo"/> : null}
+                     {/* <img className="coin-logo" src={this.getImageUrl()} alt="coin-logo"/> */}
+                     <button className="form btn">Add Asset</button>
                      </form>
                  </div>
                     )

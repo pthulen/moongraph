@@ -69,7 +69,6 @@ class CoinAsset extends Component {
                         <option value="ethereum">Ethereum</option>
                      </select> */}
                             </label>
-                            {/* {this.getImageUrl()}     */}
                      <img className="coin-logo" src={this.getImageUrl()} alt="coin-logo"/>
                      <button className="form btn">Submit</button>
                      </form>
@@ -97,7 +96,7 @@ class CoinAsset extends Component {
                         <option value="ethereum">Ethereum</option>
                      </select> */}
                             </label> 
-                     <img className="coin-logo" src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579" alt="coin-logo"/>
+                     <img className="coin-logo" src={this.getImageUrl()} alt="coin-logo"/>
                      <button className="form btn">Submit</button>
                      </form>
                  </div>

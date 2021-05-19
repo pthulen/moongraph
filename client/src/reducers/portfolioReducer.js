@@ -8,7 +8,9 @@ export const portfolioReducer = (state=initialState, action) => {
         case 'FETCH_PORTFOLIO':
             return  action.payload; 
         case 'ADD_PORTFOLIO_COIN':
-            return  action.payload;        
+            return  action.payload; 
+        case 'UPDATE_PORTFOLIO_COIN':
+            return  action.payload;            
         default:
             return state;    
     }

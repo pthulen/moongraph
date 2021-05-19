@@ -36,6 +36,7 @@ module.exports = (app) => {
 
         try {
             await portfolio.save();
+            console.log(`Portfolio created: ${portfolio}`);
             res.send(portfolio);
             
         } catch (err) {
@@ -59,7 +60,11 @@ module.exports = (app) => {
         try {
             const portfolio = await Portfolio.findOneAndUpdate({ _user: req.user.id },newCoin)
             await portfolio.save();
-            res.send(portfolio);
+            
+            const updatedPortfolio = await Portfolio.find({ _user: req.user.id });
+            console.log(`Updated portfolio: ${updatedPortfolio}`);
+            console.log(`Portfolio coin added: ${JSON.stringify(updatedPortfolio.presentData)}`);
+            res.send(updatedPortfolio);
         } catch (err) {
             console.log(err);
             res.status(400).send(err);
@@ -67,15 +72,16 @@ module.exports = (app) => {
     });
 
     //route for updating value of an existing coin/asset
-    // app.put('/api/portfolio/:id', async (req, res) => {
-        //const { id, amount }
-        //access current user's portfolio
-      //  const portfolio = await Portfolio.find({ _user: req.user.id });
+    app.put('/api/portfolio/:id', async (req, res) => {
+        const { id, amount } = req.body;
+        console.log(`id: 4${id}, amount: ${amount}`)
+       // access current user's portfolio
+       //const portfolio = await Portfolio.find({ _user: req.user.id });
 
         //find coin by Id
         //update value
     
 
-    //});
+    });
 
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import CoinAsset from './CoinAsset';
+import CoinUpdate from './CoinUpdate';
 
 class Portfolio extends Component {
     componentDidMount() {
@@ -13,6 +14,7 @@ class Portfolio extends Component {
             <div>
                 <h4>Logged In!</h4>
                 <CoinAsset />
+                <CoinUpdate />
             </div>
         );
     }

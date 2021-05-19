@@ -38,5 +38,15 @@ export const addPortfolioCoin = (coinId, amount) => async dispatch => {
     }
   const res = await axios.put('/api/portfolio', newCoinData);
 
-  dispatch({ type: 'ADD_PORTFOLIO_COIN', payload: [res.data] })
+  dispatch({ type: 'ADD_PORTFOLIO_COIN', payload: res.data })
+}
+
+export const updatePortfolioCoin = (coinId, amount) => async dispatch => {
+    const updateCoinData = {
+        id: coinId,
+        amount: amount
+    }
+  const res = await axios.put('/api/portfolio/:id', updateCoinData);
+
+  dispatch({ type: 'UPDATE_PORTFOLIO_COIN', payload: [res.data] })
 }

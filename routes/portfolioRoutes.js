@@ -74,7 +74,7 @@ module.exports = (app) => {
     //route for updating value of an existing coin/asset
     app.put('/api/portfolio/:id', async (req, res) => {
         const { id, amount } = req.body;
-        console.log(`id: 4${id}, amount: ${amount}`)
+        console.log(`id: ${id}, amount: ${amount}`)
        // access current user's portfolio
        //const portfolio = await Portfolio.find({ _user: req.user.id });
 

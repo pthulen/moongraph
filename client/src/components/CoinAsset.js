@@ -57,25 +57,29 @@ class CoinAsset extends Component {
         
     }
 
+    handleSubmit (event) {
+        event.preventDefault()
+        if(this.state.coinSelected === '') {
+            alert("Please select a coin to add.");
+            return;
+        }
+        let amount = 0;
+        this.props.addPortfolioCoin(this.state.coinSelected,amount,this.props.portfolio);
+        //re render assets in portfolio
+        this.forceUpdate();
+        //update drop down list
+        this.setState({ coinSelected: '' });
+    }
+
     renderContent() {
         let portfolio = this.props.portfolio;
             if(portfolio && portfolio.length > 0) {
                 return (
                 <div>
                         <p>Use update</p>
-                        <form onSubmit={(event) => {
-                           event.preventDefault()
-                           if(this.state.coinSelected === '') {
-                               alert("Please select a coin to add.");
-                               return;
-                           }
-                         let amount = 0;
-                         this.props.addPortfolioCoin(this.state.coinSelected,amount,this.props.portfolio);
-                         //re render assets in portfolio
-                         this.forceUpdate();
-                         //update drop down list
-                         this.setState({ coinSelected: '' });
-                         }}>
+                        <form onSubmit={(event) =>{
+                            this.handleSubmit(event);
+                        }}>
                         <label>Coin
                             <select value={this.state.coinSelected} onChange={this.handleChange}>
                                 <option value='' disabled defaultValue>Choose a Coin</option>

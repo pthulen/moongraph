@@ -17,9 +17,7 @@ class CoinAsset extends Component {
         
     }
 
-    
     handleChange(event) {
-        console.log('selected coin: ' + event.target.value)
         this.setState({coinSelected: event.target.value});
     }
 
@@ -83,7 +81,7 @@ class CoinAsset extends Component {
                         <label>Coin
                             <select value={this.state.coinSelected} onChange={this.handleChange}>
                                 <option value='' disabled defaultValue>Choose a Coin</option>
-                                {this.props.portfolio ? this.sortedCoinList().map((coin)=> {
+                                {this.props.portfolio.length > 0 ? this.sortedCoinList().map((coin)=> {
                                     return <option value={coin.id} key={coin.id}>{coin.name} </option>
                                     }) : null}
                                 

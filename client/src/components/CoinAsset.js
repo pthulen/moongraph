@@ -101,7 +101,7 @@ class CoinAsset extends Component {
                         <form onSubmit={(event) => {
                            event.preventDefault()
                          let amount = 0;
-                         this.props.createPortfolio(this.state.coinSelected,amount,this.props.portfolio);    
+                         this.props.createPortfolio(this.state.coinSelected,amount,this.props.portfolio,);    
                          }}>
                         <label>Coin
                             <select value={this.state.coinSelected} onChange={this.handleChange}>

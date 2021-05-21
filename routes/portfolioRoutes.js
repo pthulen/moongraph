@@ -54,16 +54,14 @@ module.exports = (app) => {
                     } 
             } 
             }
-        //access current user's portfolio
         //add coin to presentData -> coinData array
         //portfolio[0].presentData.coinData.push(newCoin);
         try {
+            //access current user's portfolio
             const portfolio = await Portfolio.findOneAndUpdate({ _user: req.user.id },newCoin)
             await portfolio.save();
             
             const updatedPortfolio = await Portfolio.find({ _user: req.user.id });
-            console.log(`Updated portfolio: ${updatedPortfolio}`);
-            console.log(`Portfolio coin added: ${JSON.stringify(updatedPortfolio.presentData)}`);
             res.send(updatedPortfolio);
         } catch (err) {
             console.log(err);
@@ -74,20 +72,15 @@ module.exports = (app) => {
     //route for updating value of an existing coin/asset
     app.put('/api/portfolio/:id', async (req, res) => {
         const { id, amount } = req.body;
-        console.log(`id: ${id}, amount: ${amount}`)
-        console.log(req.user.id)
         try {
-            // access current user's portfolio
-       const portfolio = await Portfolio.findOne({ _user: req.user.id });
-       console.log(portfolio);
-    console.log('Portfolio: ' +JSON.stringify(portfolio.presentData.coinData));       
+        // access current user's portfolio
+       const portfolio = await Portfolio.findOne({ _user: req.user.id });       
         //find coin index by Id
         let index = portfolio.presentData.coinData.findIndex(function(coin) {
             return coin.id == id
         })
          //update value
         portfolio.presentData.coinData[index].currentAmount = amount;
-        console.log('updated target: ' +JSON.stringify(portfolio.presentData.coinData[index]));
         portfolio.markModified('presentData.coinData');
         await portfolio.save();
         res.send(portfolio);

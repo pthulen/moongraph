@@ -99,12 +99,19 @@ class CoinAsset extends Component {
                     <div>
                         <p>No portoflio yet use createportfolio</p>
                         <form onSubmit={(event) => {
+                            if(this.state.coinSelected === '') {
+                                alert("Please select a coin to add.");
+                                return;
+                            }
                            event.preventDefault()
                          let amount = 0;
-                         this.props.createPortfolio(this.state.coinSelected,amount,this.props.portfolio,);    
+                         this.props.createPortfolio(this.state.coinSelected,amount,this.props.portfolio,);
+                         //update drop down list
+                        this.setState({ coinSelected: '' });    
                          }}>
                         <label>Coin
                             <select value={this.state.coinSelected} onChange={this.handleChange}>
+                                <option value='' disabled defaultValue>Choose a Coin</option>
                                 {this.props.coins.map((coin)=> {
                                     return <option value={coin.id} key={coin.id}>{coin.name} </option>
                                 })}

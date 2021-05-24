@@ -20,7 +20,6 @@ module.exports = (app) => {
 
     //creates portfolio with initial coin
     app.post('/api/portfolio', async (req,res) => {
-        console.log(req.body);
         const { date, id, amount } = req.body; 
         
         const portfolio = new Portfolio({
@@ -29,14 +28,15 @@ module.exports = (app) => {
                 date,
                 coinData: {
                     id,
-                    currentAmount: amount
+                    currentAmount: amount,
+                    currentPrice: '0',
+                    currentValue: '0'
                 }
             }
         })
 
         try {
             await portfolio.save();
-            console.log(`Portfolio created: ${portfolio}`);
             res.send(portfolio);
             
         } catch (err) {
@@ -50,7 +50,9 @@ module.exports = (app) => {
             $push:{
                     "presentData.coinData":{
                         id,
-                        currentAmount: amount
+                        currentAmount: amount,
+                        currentPrice: '0',
+                        currentValue: '0'
                     } 
             } 
             }
@@ -71,7 +73,7 @@ module.exports = (app) => {
 
     //route for updating value of an existing coin/asset
     app.put('/api/portfolio/:id', async (req, res) => {
-        const { id, amount } = req.body;
+        const { id, amount, currentPrice, currentValue } = req.body;
         try {
         // access current user's portfolio
        const portfolio = await Portfolio.findOne({ _user: req.user.id });       
@@ -79,8 +81,10 @@ module.exports = (app) => {
         let index = portfolio.presentData.coinData.findIndex(function(coin) {
             return coin.id == id
         })
-         //update value
+         //update amount, market price, and value of asset held
         portfolio.presentData.coinData[index].currentAmount = amount;
+        portfolio.presentData.coinData[index].currentPrice = currentPrice;
+        portfolio.presentData.coinData[index].currentValue = currentValue;
         portfolio.markModified('presentData.coinData');
         await portfolio.save();
         res.send(portfolio);

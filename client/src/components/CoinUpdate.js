@@ -7,8 +7,24 @@ class CoinUpdate extends Component {
 //onclick, update portfolio with new coin amount
 
 handleCoinUpdate(event, coinId) {
+    //once an added asset is given an update the portfolio with the coin's info
     event.preventDefault()
-    this.props.updatePortfolioCoin(coinId, event.target[0].value);
+    let currentAmount = event.target[0].value;
+    let currentValue = this.findCoinValue(coinId, currentAmount);
+    let currentPrice = this.findCoinPriceById(coinId);
+    this.props.updatePortfolioCoin(coinId, currentAmount, currentPrice, currentValue);
+}
+findCoinPriceById(coinId) {
+    if(this.props.coins){
+        let coinList = this.props.coins;
+        const found = coinList.find(obj =>{
+            return obj.id === coinId;
+        })
+        if(found){
+            const price = found.current_price;
+            return price;
+        }
+    }
 }
 
 findCoinValue(coinId, amount) {

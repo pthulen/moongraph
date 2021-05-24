@@ -55,14 +55,28 @@ class CoinAsset extends Component {
         
     }
 
+    getCoinName() {
+        //search "coins" in redux store for this.state.coinSelected
+        const currentCoin = this.state.coinSelected;
+        if(currentCoin === '') {
+            return null;
+        }
+        const found = this.props.coins.find(obj =>{
+            return obj.id === currentCoin;
+        })
+        //return matching coin's url to img element
+        return found.name
+    }
+
     handleSubmit (event) {
         event.preventDefault()
         if(this.state.coinSelected === '') {
             alert("Please select a coin to add.");
             return;
         }
+        let name = this.getCoinName();
         let amount = 0;
-        this.props.addPortfolioCoin(this.state.coinSelected,amount,this.props.portfolio);
+        this.props.addPortfolioCoin(this.state.coinSelected,name, amount,this.props.portfolio);
         //re render assets in portfolio
         this.forceUpdate();
         //update drop down list
@@ -105,7 +119,7 @@ class CoinAsset extends Component {
                             }
                            event.preventDefault()
                          let amount = 0;
-                         this.props.createPortfolio(this.state.coinSelected,amount,this.props.portfolio,);
+                         this.props.createPortfolio(this.state.coinSelected,this.getCoinName(), amount,this.props.portfolio,);
                          //update drop down list
                         this.setState({ coinSelected: '' });    
                          }}>

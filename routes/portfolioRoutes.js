@@ -20,7 +20,7 @@ module.exports = (app) => {
 
     //creates portfolio with initial coin
     app.post('/api/portfolio', async (req,res) => {
-        const { date, id, amount } = req.body; 
+        const { date, id, name, amount } = req.body; 
         
         const portfolio = new Portfolio({
             _user: req.user.id,
@@ -28,9 +28,10 @@ module.exports = (app) => {
                 date,
                 coinData: {
                     id,
+                    name,
                     currentAmount: amount,
-                    currentPrice: '0',
-                    currentValue: '0'
+                    currentPrice: 0,
+                    currentValue: 0
                 }
             }
         })
@@ -45,14 +46,15 @@ module.exports = (app) => {
     });
     //adds new coin/asset to portfolio, should always initialize with zero amount
     app.put('/api/portfolio', async (req, res) => {
-        const { id, amount } = req.body;
+        const { id, name, amount } = req.body;
         const newCoin =  {
             $push:{
                     "presentData.coinData":{
                         id,
+                        name,
                         currentAmount: amount,
-                        currentPrice: '0',
-                        currentValue: '0'
+                        currentPrice: 0,
+                        currentValue: 0
                     } 
             } 
             }

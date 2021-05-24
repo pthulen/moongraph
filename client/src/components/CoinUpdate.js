@@ -55,7 +55,7 @@ renderContent() {
                     <form onSubmit={(event) =>{
                         this.handleCoinUpdate(event, coin.id);
                     }}>
-                    <p>{coin.id}</p>
+                    <p>{coin.name}</p>
                     <input type="number" step="0.0001" name="amount" placeholder={coin.currentAmount}></input>
                     <button>Update Amount</button>
                     </form>

@@ -8,46 +8,52 @@ constructor(props) {
   super(props);
   this.state = {
     labels: [],
-  datasets: [
-    {
-      label: "First dataset",
-      data: [],
-      fill: true,
-      backgroundColor: "rgba(75,192,192,0.2)",
-      borderColor: "rgba(75,192,192,1)"
-    },
-    {
-      label: "Second dataset",
-      data: [0,0,0,0,0,0,0,0,0,33, 25, 35, 51, 54, 76],
-      fill: false,
-      borderColor: "#742774"
-    }
-  ],
-  responsive: true
+    portfolioValues: []
   }
 }
 componentDidMount(){
   this.addDateLabels()
-  this.addPortfolioValues();
+  this.createPortfolioValuesArray();
+}
+
+collectGraphData() {
+let graphData = {
+  labels: this.state.labels,
+datasets: [
+  {
+    label: "Portfolio Value",
+    data: this.state.portfolioValues,
+    fill: true,
+    backgroundColor: "rgba(75,192,192,0.2)",
+    borderColor: "rgba(75,192,192,1)"
+  },
+  {
+    label: "Second dataset",
+    data: [0,0,0,0,0,0,0,0,0,33, 25, 35, 51, 54, 76],
+    fill: false,
+    borderColor: "#742774"
+  }
+],
+responsive: true
+}
+//returns object of all needed information for chart
+console.log(this.state.portfolioValues);
+return graphData
 }
 
 //fill in total portfolio values
-addPortfolioValues() {
+createPortfolioValuesArray() {
   let portfolioValues = []
+  //if no history add zeros and current day's portfolio value
   if(this.props.portfolio && !this.props.portfolio[0].pastData){
-    portfolioValues = [0,0,0,0,0,0,0,0,0,0, 0, 0, 0, 0];
+    portfolioValues = [0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     portfolioValues.push(this.getPortfolioValue())
   }
   //create a function that returns the graph data and simplify the state data
   //update the graph data in state
-  // this.setState(prevState => ({
-  //   datasets: [
-  //     ...prevState.datasets,
-  //     [prevState.datasets[0].data = portfolioValues]
-  //   ]
-  // }));
-  // console.log(this.state.datasets)
+  this.setState({ portfolioValues: portfolioValues })
 }
+
 //generate last 14 dates
 addDateLabels() {
   let labels = []
@@ -95,10 +101,7 @@ getPortfolioValue() {
 
     render() {
         return (
-          <div>
-            <Line data={this.state} />
-            <p>{this.test}</p>
-          </div>
+            <Line data={this.collectGraphData()} />
         );
     }
 }

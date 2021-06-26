@@ -49,7 +49,9 @@ createPortfolioValuesArray() {
     portfolioValues = [0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     portfolioValues.push(this.getPortfolioValue())
   }
-  //create a function that returns the graph data and simplify the state data
+  // *** function needed ****
+  //if pastData exists, fill portfolioValues with last 13 days then append current day's portfolio value
+
   //update the graph data in state
   this.setState({ portfolioValues: portfolioValues })
 }

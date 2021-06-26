@@ -15,6 +15,7 @@
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
     "cookie-session": "^1.4.0",
+    "cron": "^1.8.2",
     "dependencies": "0.0.1",
     "express": "^4.17.1",
     "mocha": "^8.3.2",

@@ -18,9 +18,11 @@ export const fetchPortfolio = () => async dispatch => {
  
     dispatch({ type: 'FETCH_PORTFOLIO', payload: res.data });
  };
-export const createPortfolio = (coinId, name, amount) => async dispatch => {
+export const createPortfolio = (coinId, name, amount, date) => async dispatch => {
+    // let d = new Date();
+    // d.setDate(d.getDate());
       const porfolioData = {
-          date: Date.now(),
+          date: date,
           id: coinId,
           name: name,
           amount: amount

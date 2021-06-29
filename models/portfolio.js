@@ -5,7 +5,7 @@ const coinSchema = require('./coin');
 const portfolioSchema = new Schema({
     _user: { type: Schema.Types.ObjectId, ref: 'User' },
     presentData: {
-        date: Number,
+        date: String,
         portfolioValue: Number,
         coinData: [coinSchema]
     },

@@ -37,7 +37,6 @@ datasets: [
 responsive: true
 }
 //returns object of all needed information for chart
-console.log(this.state.portfolioValues);
 return graphData
 }
 

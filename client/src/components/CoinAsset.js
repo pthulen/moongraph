@@ -119,7 +119,12 @@ class CoinAsset extends Component {
                             }
                            event.preventDefault()
                          let amount = 0;
-                         this.props.createPortfolio(this.state.coinSelected,this.getCoinName(), amount,this.props.portfolio,);
+                         let date; 
+                        let d = new Date();
+                        d.setDate(d.getDate());
+                        date = d.toLocaleDateString()
+                        console.log(typeof date);
+                         this.props.createPortfolio(this.state.coinSelected,this.getCoinName(), amount,date, this.props.portfolio);
                          //update drop down list
                         this.setState({ coinSelected: '' });    
                          }}>
@@ -130,10 +135,6 @@ class CoinAsset extends Component {
                                     return <option value={coin.id} key={coin.id}>{coin.name} </option>
                                 })}
                             </select> 
-                     {/* <select value={this.state.coinSelected} onChange={this.handleChange}>
-                         <option value="bitcoin">Bitcoin</option>
-                        <option value="ethereum">Ethereum</option>
-                     </select> */}
                             </label> 
                             {this.state.coinSelected ? <img className="coin-logo" src={this.getImageUrl()} alt="coin-logo"/> : null}
                      {/* <img className="coin-logo" src={this.getImageUrl()} alt="coin-logo"/> */}

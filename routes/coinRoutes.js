@@ -30,7 +30,6 @@ module.exports = (app) => {
     //get current price of coin by ID. Will be used to regularly pull updated prices
     app.get('/api/coins/prices/', async (req, res) => {
         try {
-            console.log(req.body)
             //build correct url from requested coins
             let urlBase = 'https://api.coingecko.com/api/v3/simple/price?ids=';
             let urlEnd = '&vs_currencies=usd'

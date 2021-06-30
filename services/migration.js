@@ -1,8 +1,8 @@
 const cron = require('cron').CronJob;
-// const keys = require('../config/keys');
 const mongoose = require('mongoose');
 const Portfolio = mongoose.model('portfolio');
 const axios = require('axios');
+const currentDate = require('./date')();  //current date in string form
 module.exports = function() {
     //function will need to 
     //find all portfolio documents 
@@ -11,7 +11,7 @@ module.exports = function() {
         //if pastData is empty add 0's for past 13 days 
         //push to end of pastData 
 
-    var job = new cron('1 1 * * *', async function() {
+    var job = new cron('* * * * *', async function() {
         //fetch current coin prices 
         let coinList; 
         try {
@@ -69,17 +69,33 @@ module.exports = function() {
                 if(portfolio.pastData) {
                     //portfolio already has pastData
                     //Add current Porfolio's value to end of array
-                    portfolio.pastData.push({
-                        coinData:portfolio.presentData.coinData,
-                        Date: portfolio.presentData.date,
-                        portfolioValue: currentProfolioValue
-                    });
-                    portfolio.save();
+                    async function updateExisting() {
+                        try {
+                            const newData =  {
+                                $push:{
+                                        "pastData":{
+                                            coinData:portfolio.presentData.coinData,
+                                            Date: currentDate,
+                                            portfolioValue: currentProfolioValue
+                                        } 
+                                } 
+                                }
+        
+                            let userId = portfolio._user;
+                            const existingPortfolio = await Portfolio.findOneAndUpdate({ _user: userId },newData)
+                            await existingPortfolio.save();
+                            
+                        } catch (error) {
+                            console.log('Error in update existing portfolio: ' + error)
+                        }
+                    }
+                    updateExisting();
+                    
                 } else {
                     //if this is the first date of the portfolio
                     //add 14 zero days 
                     let pastDataPrefill = []
-                        for(let i= 14; i > -1; i--){
+                        for(let i= 14; i > 0; i--){
                         let d = new Date();
                         d.setDate(d.getDate()-i)
                         pastDataPrefill.push({
@@ -91,7 +107,7 @@ module.exports = function() {
                     //add current date and value to end of array
                     pastDataPrefill.push({
                         coinData:portfolio.presentData.coinData,
-                        Date: portfolio.presentData.date,
+                        Date: currentDate,
                         portfolioValue: currentProfolioValue
                     });
                     portfolio.pastData = pastDataPrefill;
@@ -102,6 +118,7 @@ module.exports = function() {
                 }
                 
             });
+            console.log('Migration completed');
         } catch (error) {
             console.log(error);
         }

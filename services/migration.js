@@ -11,7 +11,7 @@ module.exports = function() {
         //if pastData is empty add 0's for past 13 days 
         //push to end of pastData 
 
-    var job = new cron('* * * * *', async function() {
+    var job = new cron('1 1 * * *', async function() {
         //fetch current coin prices 
         let coinList; 
         try {
@@ -34,7 +34,6 @@ module.exports = function() {
             console.log(error);
         }
         
-        console.log('You will see this message every minute');
         try {
             const portfolios = await Portfolio.find();
             portfolios.forEach(portfolio => {
@@ -50,6 +49,7 @@ module.exports = function() {
                     currentAmount: coin.currentAmount
                 })
             })
+            
             //find current price by id and multiply by amount, return values to an array
             let values= [];
             idsAndAmounts.forEach(coin => {
@@ -65,22 +65,43 @@ module.exports = function() {
             let totalValue = values.reduce((acc, currentValue) => acc + currentValue);
             currentProfolioValue = totalValue.toFixed(2);
 
-
-
                
-                    if(portfolio.pastData) {
-                        //get portfolio value
-                    }
-                    portfolio.pastData = [{
+                if(portfolio.pastData) {
+                    //portfolio already has pastData
+                    //Add current Porfolio's value to end of array
+                    portfolio.pastData.push({
                         coinData:portfolio.presentData.coinData,
                         Date: portfolio.presentData.date,
                         portfolioValue: currentProfolioValue
-                    }];
+                    });
                     portfolio.save();
+                } else {
+                    //if this is the first date of the portfolio
+                    //add 14 zero days 
+                    let pastDataPrefill = []
+                        for(let i= 14; i > -1; i--){
+                        let d = new Date();
+                        d.setDate(d.getDate()-i)
+                        pastDataPrefill.push({
+                            coinData: '',
+                            Date:d.toLocaleDateString(),
+                            portfolioValue: '0'
+                        })
+                        }
+                    //add current date and value to end of array
+                    pastDataPrefill.push({
+                        coinData:portfolio.presentData.coinData,
+                        Date: portfolio.presentData.date,
+                        portfolioValue: currentProfolioValue
+                    });
+                    portfolio.pastData = pastDataPrefill;
+                    portfolio.save();
+
+                }
+                   
                 }
                 
             });
-            console.log(portfolios)
         } catch (error) {
             console.log(error);
         }
@@ -90,3 +111,4 @@ module.exports = function() {
 
 
 //timer 1 1 * * *  (1:01 am)
+

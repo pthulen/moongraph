@@ -1,7 +1,12 @@
 html{
-  background-color: #282c34;
+  width: auto;
 }
 
+.App {
+  background-color: E5E5E5;
+}
+
+/* header styles */
 .App-header {
   padding: 0.5em;
   background-color: #282c34;
@@ -10,6 +15,11 @@ html{
   color: white;
   display: flex;
   justify-content: space-between;
+}
+
+.App-header img {
+  max-width: 25%;
+  margin-left: 2em;
 }
 
 .graph {
@@ -31,4 +41,53 @@ html{
   height: 2em;
   width: 2em;
 }
+
+.btn button{
+  padding: 1.25em;
+  border-radius: 30px;
+  border: black;
+  border-style: sold;
+}
+
+/* Landing styles */
+
+.landing-hero {
+  background-color: #7cb1d4;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.landing h2, h3 {
+  color: white;
+  text-align: center;
+}
+.landing-middle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.landing-middle img {
+  width: 50%;
+}
+.landing-middle h3 {
+  text-align: center;
+  width: 50%;
+  color: #282c34;
+}
+.landing-info {
+  padding: 1.5em;
+  background-color: #7cb1d4;
+  line-height: 1.25em;
+}
+.landing-info h4, p {
+  text-align: left;
+}
+
+/* footer styles  */
+.footer p {
+  text-align: center;
+  padding: 1.5em;
+}
+
 

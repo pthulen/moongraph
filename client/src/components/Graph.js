@@ -102,7 +102,10 @@ getPortfolioValue() {
 
     render() {
         return (
+          <div className="container graph">
             <Line data={this.collectGraphData()} />
+          </div>
+            
         );
     }
 }

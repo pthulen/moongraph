@@ -7,17 +7,7 @@ import CoinUpdate from './CoinUpdate';
 class Portfolio extends Component {
     componentDidMount() {
             this.props.fetchPortfolio();
-            //this.props.addPortfolioCoin("ethereum","4");
     }
-    // getPortfolioValue() {
-    //     if(this.props.portfolio && this.props.portfolio.length > 0){
-    //         const portfolio= this.props.portfolio;
-    //         let values= [];
-    //         portfolio[0].presentData.coinData.forEach(coin => values.push(coin.currentValue))
-    //         let totalValue = values.reduce((acc, currentValue) => acc + currentValue);
-    //         return totalValue.toFixed(2);
-    //     }
-    // }
     getPortfolioValue() {
             if(this.props.portfolio && this.props.portfolio.length > 0 && this.props.coins){
                 const portfolio= this.props.portfolio[0].presentData.coinData;
@@ -48,7 +38,7 @@ class Portfolio extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="container main">
                 <h4>Logged In!</h4>
                 <h5>Portfolio Value: ${this.getPortfolioValue()}</h5>
                 <CoinAsset />

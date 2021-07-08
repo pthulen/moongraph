@@ -45,9 +45,8 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //import and run migration cron job
-require('./services/migration')();
-// const date = require('./services/date')();
-// console.log(date);
+//require('./services/migration')();
+
 
 
 const PORT = process.env.PORT || 5000;

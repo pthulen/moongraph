@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import logo from '../assets/default-logo.svg'
 
 
 class Header extends Component {
@@ -21,7 +22,8 @@ class Header extends Component {
     render() {
         return (
             <div className="App-header">
-                <h4>Moon Graph</h4>
+                <img src={logo} alt="moongraph-logo" />
+                {/* <h4>Moon Graph</h4> */}
                 {this.renderContent()}
             </div>
         );

@@ -15,11 +15,20 @@ html{
   color: white;
   display: flex;
   justify-content: space-between;
+  list-style-type: none;
+  align-items: center;
 }
 
 .App-header img {
   max-width: 25%;
   margin-left: 2em;
+}
+
+.App-header a {
+  border-radius: 30px;
+  padding: 0.25em;
+  background-color: white;
+  text-decoration: none;
 }
 
 .graph {
@@ -90,4 +99,12 @@ html{
   padding: 1.5em;
 }
 
+p {
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.75em;
+}
+
+h2, h3, h4, a {
+  font-family: 'Saira', sans-serif;
+}
 

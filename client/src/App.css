@@ -3,7 +3,7 @@ html{
 }
 
 .App {
-  background-color: E5E5E5;
+  background-color: #7cb1d4;
 }
 
 /* header styles */
@@ -30,6 +30,7 @@ html{
   background-color: white;
   text-decoration: none;
 }
+
 
 .graph {
  margin: 2em;
@@ -108,3 +109,18 @@ h2, h3, h4, a {
   font-family: 'Saira', sans-serif;
 }
 
+
+/* styles for small screens */
+
+@media screen and (max-width: 500px) {
+  .landing-middle, .landing-info {
+    flex-direction: column;
+  }
+
+  .col-reverse {
+    flex-direction: column-reverse;
+  }
+  .landing-middle img {
+    width: 75%;
+  }
+}

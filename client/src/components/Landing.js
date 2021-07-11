@@ -26,7 +26,7 @@ class Landing extends Component {
                     </div>
                     <img src={carousel} alt="non-information rocket" />
                 </div>
-                <div className="landing-middle landing-info">
+                <div className="landing-middle landing-info col-reverse">
                     <img src={security} alt="non-information rocket" />
                     <div className="text-content">
                         <h4>Security</h4>

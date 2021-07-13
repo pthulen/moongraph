@@ -3,8 +3,10 @@ html{
 }
 
 .App {
-  background-color: #7cb1d4;
+  background-color: #282c34;
 }
+
+/* background-color: #7cb1d4; */
 
 /* header styles */
 .App-header {
@@ -62,7 +64,7 @@ html{
 /* Landing styles */
 
 .landing-hero {
-  background-color: #7cb1d4;
+  background-color: #282c34;
   padding: 2em;
   display: flex;
   flex-direction: column;
@@ -73,6 +75,7 @@ html{
   text-align: center;
 }
 .landing-middle {
+  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -87,10 +90,11 @@ html{
 }
 .landing-info {
   padding: 1.5em;
-  background-color: #7cb1d4;
+  background-color: #282c34;
   line-height: 1.25em;
 }
 .landing-info h4, p {
+  color: white;
   text-align: left;
 }
 

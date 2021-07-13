@@ -18,7 +18,9 @@ class Landing extends Component {
                 <div className="landing-middle">
                     <img src={rocketImage} alt="non-information rocket" />
                     <h3>Why Moon Graph?</h3>
+                    
                 </div>
+                
                 <div className="landing-middle landing-info">
                     <div className="text-content">
                         <h4>Simplify</h4>

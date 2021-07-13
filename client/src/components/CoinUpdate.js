@@ -50,6 +50,7 @@ renderContent() {
         if(this.props.portfolio.length > 0){
             let portfolio = this.props.portfolio[0].presentData.coinData;
         return portfolio.map(coin =>{
+            console.log(coin);
             return (
                 <div key={coin.id}>
                     <form onSubmit={(event) =>{

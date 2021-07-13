@@ -25,16 +25,17 @@ datasets: [
     data: this.state.portfolioValues,
     fill: true,
     backgroundColor: "rgba(75,192,192,0.2)",
-    borderColor: "rgba(75,192,192,1)"
+    borderColor: "rgba(255, 255, 255, 0.582)"
   },
   {
     label: "Second dataset",
     data: [0,0,0,0,0,0,0,0,0,33, 25, 35, 51, 54, 76],
     fill: false,
-    borderColor: "#742774"
+    borderColor: "#4885ff"
   }
 ],
-responsive: true
+responsive: true,
+
 }
 //returns object of all needed information for chart
 return graphData

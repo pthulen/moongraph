@@ -56,7 +56,7 @@ renderContent() {
                     <form onSubmit={(event) =>{
                         this.handleCoinUpdate(event, coin.id);
                     }}>
-                    <p>{coin.name}</p>
+                    <p>{coin.name}</p><img src={this.getImageUrlById(coin.id)} alt="coin logo" class="coin-logo"/>
                     <input type="number" step="0.0001" name="amount" placeholder={coin.currentAmount}></input>
                     <button>Update Amount</button>
                     </form>
@@ -66,6 +66,18 @@ renderContent() {
         })
         }
     } 
+}
+getImageUrlById(coinId) {
+    //search "coins" in redux store for current coin
+    if(coinId === '') {
+        return null;
+    }
+    const found = this.props.coins.find(obj =>{
+        return obj.id === coinId;
+    })
+    //return matching coin's url to img element
+    return found.image
+    
 }
 
 render() {

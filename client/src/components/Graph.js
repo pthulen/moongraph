@@ -51,7 +51,14 @@ createPortfolioValuesArray() {
   }
   // *** function needed ****
   //if pastData exists, fill portfolioValues with last 13 days then append current day's portfolio value
-
+  if(this.props.portfolio && this.props.portfolio[0].pastData){
+    //pull last 13 days
+    for(let i=this.props.portfolio[0].pastData.length - 14; i < this.props.portfolio[0].pastData.length; i++){
+      portfolioValues.push(this.props.portfolio[0].pastData[i].portfolioValue);
+    }
+    //add today's portfolio value to end
+    portfolioValues.push(this.getPortfolioValue())
+  }
   //update the graph data in state
   this.setState({ portfolioValues: portfolioValues })
 }

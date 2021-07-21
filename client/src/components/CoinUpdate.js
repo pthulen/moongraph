@@ -68,6 +68,8 @@ renderContent() {
     } 
 }
 getImageUrlById(coinId) {
+    //check if coin data is loaded to store
+    if(this.props.coins) {
     //search "coins" in redux store for current coin
     if(coinId === '') {
         return null;
@@ -77,7 +79,9 @@ getImageUrlById(coinId) {
     })
     //return matching coin's url to img element
     return found.image
-    
+    } else {
+        return '';
+    }
 }
 
 render() {

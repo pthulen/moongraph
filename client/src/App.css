@@ -28,9 +28,14 @@ html{
 
 .App-header a {
   border-radius: 30px;
-  padding: 0.25em;
+  padding: 0.4em;
   background-color: white;
   text-decoration: none;
+}
+.App-header a:hover {
+  background-color: #282c34;
+  color: white;
+  border: 0.1em solid white;
 }
 
 
@@ -57,8 +62,13 @@ html{
 .btn button{
   padding: 1.25em;
   border-radius: 30px;
-  border: black;
+  border: 0.1em solid black;
   border-style: sold;
+}
+.btn button:hover{
+  background-color: #282c34;
+  color: white;
+  border: 0.1em solid white;
 }
 
 /* Landing styles */

@@ -12,6 +12,8 @@ import Footer from './Footer';
 import '../App.css';
 import Portfolio from './Portfolio';
 
+//remove this line before deploy
+
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
